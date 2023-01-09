@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>API in JS</title>
+        <style>
+            .box{
+                padding: 10px;
+                margin: 10px;
+                background-color: darkgoldenrod;
+                color: white;
+                text-align: center;
+                box-shadow: 10px 10px 10px rgb(160,118,13,0.6);
+            }
+        </style>
+    </head>
+    <body>
+        <main></main>
+        <script src="/third week/class35-work with APIs in JavaScript-CipherSchools/api.js">
+            fetch("https://jsonplaceholder.typicode.com/users")
+    .then((response)=>response.json())
+    .then((data)=>console.log(data));
+
+async function getUsers(){
+    let url="https://jsonplaceholder.typicode.com/users";
+
+    try{
+        let response=await fetch(url);
+        return await response.json();
+    }catch(error){
+        console.log(error);
+    }
+}
+
+async function Users(){
+    let users = await getUsers();
+    let html="";
+
+    users.forEach((user)=>{
+        let content=`<div class="box">
+                <p>${user.name}</p>
+                <p>${user.email}</p>
+        </div>`;
+        html+=content;
+    });
+    document.body.innerHTML=html;
+}
+
+Users();
+        </script>
+    </body>
+</html>
